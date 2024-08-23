@@ -2,7 +2,6 @@
 
 # 📧 Gmail Chrome Extension - Emaildojo
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 Welcome to the **Emaildojo** Chrome extension! This tool provides various Gmail functionalities, focusing on efficient email management and enhancing your Gmail experience.
 
