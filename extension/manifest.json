@@ -1,0 +1,37 @@
+  {
+    "manifest_version": 3,
+    "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+    "name": "Emailwipe",
+    "version": "1.0.0",
+    "description": "Our app is designed to enhance email management by providing features to scan unread emails, calculate email sizes, and delete.",
+    "permissions": [
+      "activeTab",
+      "scripting",
+      "storage"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+   "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content.js"],
+      "css":["style.css"]
+    }],
+    "action": {
+      "default_popup": "popup.html",  
+      "default_icon": {
+        "16": "images/Netcore.png",
+        "48": "images/Netcore.png",
+        "128": "images/Netcore.png"
+      }
+    },
+    "icons": {
+      "16": "images/Netcore.png",
+      "48": "images/Netcore.png",
+      "128": "images/Netcore.png"
+    }
+  }
+  

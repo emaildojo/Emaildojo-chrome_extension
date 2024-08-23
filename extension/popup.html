@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Popup</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        width: 700px !important;
+        height: 400px !important;
+        margin: 0;
+        background-color: #f7f8fc;
+        /* font-family: "Arimo", sans-serif !important; */
+        font-family: "GTWalsheimPro", sans-serif !important;
+      }
+      header {
+        padding: 20px 10px 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+      }
+      .logo {
+        width: 100px;
+      }
+      .custom-container {
+        /* padding: 0 20px 0 20px; */
+        padding-top: 20px;
+        padding-bottom: 40px;
+        width: 100%;
+        height: 100%;
+        background-color: #f7f8fc;
+      }
+      .inner-custom-container {
+        margin: 0px 20px 20px 20px;
+        border: 1px solid #d1d2d4;
+        border-radius: 5px;
+        background-color: white;
+        padding: 20px 20px 60px 20px;
+      }
+      .content-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      #occupied {
+        font-size: 25px;
+        color: #0293fc;
+      }
+      table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: auto;
+        font-size: 18px;
+        text-align: left;
+      }
+      th,
+      td {
+        padding: 6px;
+        border: 1px solid #ddd;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+      .shimmer {
+        animation: shimmer 1.5s infinite linear;
+        background: linear-gradient(
+          to right,
+          #f6f7f8 0%,
+          #edeef1 20%,
+          #f6f7f8 40%,
+          #f6f7f8 100%
+        );
+        background-size: 1000px 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .custom-container-heading {
+        font-size: 21px;
+        text-decoration: underline;
+      }
+      .card-title {
+        font-size: 18px;
+      }
+      .card-sub-title {
+        font-size: 14px;
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: -1000px 0;
+        }
+        100% {
+          background-position: 1000px 0;
+        }
+      }
+      .gap-20 {
+        gap: 20px;
+      }
+      .gmail-btn {
+        background-color: #e8eff6;
+        padding: 20px 40px 20px 40px;
+        border-radius: 15px;
+      }
+      .gmail-btn:hover {
+        background-color: #d4e0ed;
+        cursor: pointer;
+      }
+      .display-none {
+        display: none;
+      }
+      .underline {
+        text-decoration: underline;
+      }
+      /* HTML: <div class="loader"></div> */
+      .loader {
+        width: 100px;
+        aspect-ratio: 1;
+        padding: 10px;
+        box-sizing: border-box;
+        display: grid;
+        background: #fff;
+        filter: blur(5px) contrast(10) hue-rotate(300deg);
+        mix-blend-mode: darken;
+      }
+      .loader:before,
+      .loader:after {
+        content: "";
+        grid-area: 1/1;
+        width: 40px;
+        height: 40px;
+        background: #ffff00;
+        animation: l7 2s infinite;
+      }
+      .loader:after {
+        animation-delay: -1s;
+      }
+      .pointer {
+        cursor: pointer;
+      }
+      #delete,
+      .delete {
+        padding: 10px 20px 10px 20px;
+        background-color: #e0736e;
+        border: none;
+        border-radius: 10px;
+        color: white;
+      }
+      #cancel {
+        padding: 10px 20px 10px 20px;
+        background-color: #d4d3d0;
+        border: none;
+        border-radius: 10px;
+        color: white;
+      }
+      .make-space {
+        padding: 20px 20px 20px 40px;
+        background-color: #299cc0;
+        border-radius: 15px;
+        color: white;
+        cursor: pointer;
+      }
+      .make-space:hover {
+        opacity: 0.7;
+      }
+      #profile-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      .privacy-inner {
+        background-color: #edf4fc;
+        margin: 0px 20px 20px 20px;
+        border-radius: 5px;
+        padding: 20px 20px 60px 20px;
+      }
+
+      .gsi-material-button {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-appearance: none;
+  background-color: WHITE;
+  background-image: none;
+  border: 1px solid #747775;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #1f1f1f;
+  cursor: pointer;
+  font-family: 'Roboto', arial, sans-serif;
+  font-size: 14px;
+  height: 40px;
+  letter-spacing: 0.25px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 12px;
+  position: relative;
+  text-align: center;
+  -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
+  transition: background-color .218s, border-color .218s, box-shadow .218s;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+  max-width: 400px;
+  min-width: min-content;
+}
+
+.gsi-material-button .gsi-material-button-icon {
+  height: 20px;
+  margin-right: 12px;
+  min-width: 20px;
+  width: 20px;
+}
+
+.gsi-material-button .gsi-material-button-content-wrapper {
+  -webkit-align-items: center;
+  align-items: center;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  height: 100%;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  font-family: 'Roboto', arial, sans-serif;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+
+.gsi-material-button .gsi-material-button-state {
+  -webkit-transition: opacity .218s;
+  transition: opacity .218s;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.gsi-material-button:disabled {
+  cursor: default;
+  background-color: #ffffff61;
+  border-color: #1f1f1f1f;
+}
+
+.gsi-material-button:disabled .gsi-material-button-contents {
+  opacity: 38%;
+}
+
+.gsi-material-button:disabled .gsi-material-button-icon {
+  opacity: 38%;
+}
+
+.gsi-material-button:not(:disabled):active .gsi-material-button-state, 
+.gsi-material-button:not(:disabled):focus .gsi-material-button-state {
+  background-color: #303030;
+  opacity: 12%;
+}
+
+.gsi-material-button:not(:disabled):hover {
+  -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+}
+
+.gsi-material-button:not(:disabled):hover .gsi-material-button-state {
+  background-color: #303030;
+  opacity: 8%;
+}
+
+      @keyframes l7 {
+        0% {
+          transform: translate(0, 0);
+        }
+        25% {
+          transform: translate(100%, 0);
+        }
+        50% {
+          transform: translate(100%, 100%);
+        }
+        75% {
+          transform: translate(0, 100%);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="d-flex align-items-center">
+        <div>
+          <img
+            src="images/emailwipe.svg"
+            alt="netcore_emaildojo_logo"
+            class="logo"
+          />
+        </div>
+        <div class="ms-4"><h1>EmailWipe</h1></div>
+      </div>
+    </header>
+    <hr />
+    <div id="loadingdiv">
+      <div
+        style="width: 100%"
+        class="d-flex justify-content-center align-items-center"
+      >
+        <div>
+          <div class="loader m-auto"></div>
+        </div>
+      </div>
+    </div>
+    <div class="auth px-4 py-4 display-none" id="login-btn">
+      <div class="d-flex justify-content-center align-items-center">
+        <div>
+          <div>
+            <p>Welcome,</p>
+            <p>
+              EmailWipe helps you free up Gmail storage by deleting unwanted
+              emails that you've never opened or no longer used.
+            </p>
+            <p>
+              Plus, you can browse your Gmail worry-free with Privacy Mode,
+              which hides images, numbers, and custom sender domains.
+            </p>
+          </div>
+          <a href="http://emaildojo.io/extension" target="_blank">
+            <div class="d-flex justify-content-center">
+              <button class="gsi-material-button">
+                <div class="gsi-material-button-state"></div>
+                <div class="gsi-material-button-content-wrapper">
+                  <div class="gsi-material-button-icon">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
+                      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                      <path fill="none" d="M0 0h48v48H0z"></path>
+                    </svg>
+                  </div>
+                  <span class="gsi-material-button-contents">Sign in with Google</span>
+                  <span style="display: none;">Sign in with Google</span>
+                </div>
+              </button>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="custom-container" id="contt">
+      <div class="display-none" id="cont">
+        <div class="pb-4 mt-4 d-flex justify-content-center gap-20">
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="cleaupSwitch"
+            />
+            <label class="form-check-label" for="cleaupSwitch"
+              >CleanUp Mode</label
+            >
+          </div>
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="privacySwitch"
+            />
+            <label class="form-check-label" for="privacySwitch"
+              >Privacy Mode</label
+            >
+          </div>
+        </div>
+      </div>
+            <!-- Privacy section starts -->
+            <div id="privacy-section" class="display-none">
+              <div class="privacy-inner px-4 py-4">
+                <div class="form-check form-switch pb-4">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="imageSwitch"
+                  />
+                  <label class="form-check-label" for="cleaupSwitch">Images</label>
+                </div>
+                <div class="form-check form-switch pb-4">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="numberSwitch"
+                  />
+                  <label class="form-check-label" for="privacySwitch">Numbers</label>
+                </div>
+                <div class="form-check form-switch pb-4">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="domainSwitcg"
+                    disabled
+                  />
+                  <label class="form-check-label" for="privacySwitch"
+                    >Sender Domain</label
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- Privacy section ends -->
+      <!-- Clean up secntion stats -->
+      <div id="cleanup-section">
+        <!-- Clean up card starts -->
+        <div id="make-space" class="display-none">
+          <div class="inner-custom-container">
+            <div class="mb-4 pointer" id="make-space-back">
+              <img src="/images/back.svg" alt="" width="30" height="30" />
+            </div>
+            <div class="custom-container-heading">
+              <p>Make Space</p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <div style="width: 50%">
+                <div class="heading-blue" id="clean-unseen-count">
+                  Loading ...
+                </div>
+                <div>Unseen emails</div>
+              </div>
+              <div style="width: 50%">
+                Make Space helps you identify and clear space in Gmail by
+                deleting unused emails.
+              </div>
+            </div>
+            <div>
+              <div class="d-flex justify-content-center mt-4">
+                <button class="delete mt-4" id="del-popup">Delete</button>
+              </div>
+            </div>
+            <div>
+              <div class="custom-container-heading">
+                <p>Last Deleted</p>
+              </div>
+              <div id="back-table">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="shimmer">File</th>
+                      <th class="shimmer">Deletion date</th>
+                      <th class="shimmer">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="shimmer" colspan="1">&nbsp;</td>
+                      <td class="shimmer" colspan="1">&nbsp;</td>
+                      <td class="shimmer" colspan="1">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td class="shimmer" colspan="1">&nbsp;</td>
+                      <td class="shimmer" colspan="1">&nbsp;</td>
+                      <td class="shimmer" colspan="1">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td class="shimmer" colspan="1">&nbsp;</td>
+                      <td class="shimmer" colspan="1">&nbsp;</td>
+                      <td class="shimmer" colspan="1">&nbsp;</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Clean up card ends -->
+        <!-- Clean up form starts -->
+        <div id="cleanup-form" class="px-4 inner-custom-container display-none">
+          <div>
+            <div>
+              <h2>Are you sure ?</h2>
+              <hr style="width: 40%" />
+            </div>
+            <!-- Clean up Form text content starts-->
+            <div
+              class="d-flex justify-content-between align-items-center gap-20"
+            >
+              <div style="width: 50%; margin: auto">
+                <div class="heading-blue" id="form-unseen-count">
+                  Loading ...
+                </div>
+                <div>Unseen emails will be deleted</div>
+              </div>
+              <div style="width: 50%; margin: auto">
+                <div>Note :</div>
+                <div>
+                  Your emails will be permanently deleted, but don't worry we'll
+                  hold the cleared space for you for the next 7 days.
+                </div>
+              </div>
+            </div>
+            <div
+              class="d-flex justify-content-between align-items-center gap-20 mt-4"
+            >
+              <div style="width: 50%; margin: auto">
+                <div class="heading-blue" id="form-unseen-space">
+                  Loading ...
+                </div>
+                <div>will be freed</div>
+              </div>
+              <div style="width: 50%; margin: auto">
+                <div>
+                  If you need to revisit them, you can download them within this
+                  period. After that, the emails will be permanently deleted.
+                </div>
+              </div>
+            </div>
+            <!-- Clean up Form text content ends-->
+            <!-- Clean up form input starts -->
+            <div>
+              <div>
+                <h2>One last Step</h2>
+                <hr style="width: 40%" />
+              </div>
+              <div>
+                <div class="d-flex justify-content-between">
+                  <div>Unique Filename</div>
+                  <div><input type="text" id="filename" /></div>
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                  <div>Secret Key :</div>
+                  <div><input type="password" id="password" /></div>
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                  <div>Repeat Secret Key :</div>
+                  <div><input type="password" id="repeat-password" /></div>
+                </div>
+                <div class="d-flex justify-content-evenly mt-4">
+                  <div><button id="delete">Done, delete it.</button></div>
+                  <div><button id="cancel">Cancel</button></div>
+                </div>
+              </div>
+            </div>
+            <!-- Clean up form input ends -->
+          </div>
+        </div>
+        <!-- Clean up form ends -->
+        <div class="inner-custom-container display-none" id="inner">
+          <div class="custom-container-heading">
+            <p>Disk Information</p>
+          </div>
+          <!-- <div class="content-flex">
+                    <h1>Unread Emails</h1>
+                    <div id="unreadCount">Loading...</div>
+                </div> -->
+          <div class="content-flex">
+            <div>
+              <p class="card-title">
+                Total Storage Used <br />
+                <span class="card-sub-title">includes google drive</span>
+              </p>
+            </div>
+            <div style="width: 30%; margin: auto; text-align: center">
+              <div style="width: 100%" id="mailbox-storage-progress">
+                Loading...
+              </div>
+            </div>
+            <div>
+              <div id="occupied">Loading...</div>
+            </div>
+          </div>
+          <div class="content-flex">
+            <div>
+              <p class="card-title">
+                Storage Used <br />
+                <span class="card-sub-title">by unseen emails</span>
+              </p>
+            </div>
+            <div style="width: 30%; margin: auto; text-align: center">
+              <div style="width: 100%" id="unread-space">Loading...</div>
+            </div>
+            <div>
+              <div id="unreadCount">Loading...</div>
+              <div>Unseen emails</div>
+            </div>
+          </div>
+          <div class="mt-4 d-flex justify-content-center gap-20">
+            <a href="https://one.google.com/storage" target="_blank">
+              <div class="make-space">
+                <div class="d-flex gap-20 align-items-center">
+                  <!-- <div>
+                    <img src="/images/clean.svg" width="40" height="30" alt="" />
+                  </div> -->
+                  <div>Buy More Space</div>
+                </div>
+              </div>
+            </a>
+            <div class="make-space" id="delete-box">
+              <div class="d-flex gap-20 align-items-center">
+                <div>
+                  <img src="/images/clean.svg" width="40" height="30" alt="" />
+                </div>
+                <div>Make Space</div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <!-- <button id="previous">Prev</button>
+                    <button id="next-page">Next</button> -->
+            <div class="custom-container-heading">
+              <p>Your Email Storage</p>
+            </div>
+            <div
+              id="next-page"
+              class="pointer d-flex justify-content-between align-items-center gap-20"
+            >
+              <div>
+                <div>Next</div>
+              </div>
+              <div>
+                <img
+                  src="/images/nextArrow.svg"
+                  alt=""
+                  width="20"
+                  height="20"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- <hr style="width: 60%;" class="mb-4"> -->
+          <div class="subjectLines" id="subjectLine">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="shimmer">Subject</th>
+                  <th class="shimmer">Size (MB)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                  <td class="shimmer" colspan="1">&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Clean up secntion ends -->
+
+      <div class="py-4 px-4 display-none" id="profile">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex gap-20 align-items-center">
+            <div><img src="" alt="" id="profile-image" /></div>
+            <div>
+              <div
+                id="userName"
+                style="
+                  text-transform: capitalize;
+                  font-size: 16px;
+                  color: #484848;
+                "
+              >
+                Loading ...
+              </div>
+              <div id="em" style="font-size: 14px; color: #6d6c6c">
+                Loading ...
+              </div>
+              </div>
+          </div>
+          <div>
+              Want to revoke access to your email <a href="https://emaildojo.io/email-wipe-chrome-extension/" target="_blank">Click here</a>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="py-4">
+
+        </div> -->
+    </div>
+    <script src="popup.js"></script>
+    <!-- <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"
+></script> -->
+  </body>
+</html>

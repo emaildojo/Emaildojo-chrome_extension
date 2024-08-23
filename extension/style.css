@@ -1,0 +1,37 @@
+@font-face {
+  font-family: "GTWalsheimPro";
+  src: url("fonts/GTWalsheimPro-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GTWalsheimPro";
+  src: url("fonts/GTWalsheimPro-Light.ttf") format("truetype");
+  font-weight: 300; /* Light weight */
+  font-style: normal;
+}
+
+.extension-logo-container {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.extension-logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.blur {
+  filter: blur(4px);
+}
