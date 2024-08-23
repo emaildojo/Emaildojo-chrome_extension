@@ -1,1 +1,1 @@
-# Emaildojo-chrome_extension.
+# Emaildojo-chrome_extension
