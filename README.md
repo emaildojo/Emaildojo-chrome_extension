@@ -26,3 +26,8 @@ Welcome to the **Emaildojo** Chrome extension! This tool provides various Gmail 
    ```bash
    git clone https://github.com/emaildojo/emaildojo-chrome_extension.git
 
+## Browsers 
+-- Chrome Version 128.0.6613.84 (Official Build) (64-bit) 
+-- Brave Version 1.68.1.37 - MacOS
+-- Brave Version 1.69.153 - Ubuntu
+-- Opera Ubuntu
